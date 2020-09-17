@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        double widht = Double.parseDouble(scanner.nextLine());
+        double heidht = Double.parseDouble(scanner.nextLine());
+
+        int area = calcArea(widht,heidht);
+        System.out.println(area);
+    }
+
+     static int calcArea(double widht, double heidht) {
+        double result= widht * heidht;
+        String formatres = String.format("%.0f",result);
+        int res = Integer.parseInt(formatres);
+        return res;
+    }
+
+
+}
+
+
+
+
+
