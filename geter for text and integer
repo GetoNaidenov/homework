@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String text = scanner.nextLine();
+
+        switch (text){
+            case "int":
+                int first =Integer.parseInt(scanner.nextLine());
+                int secont = Integer.parseInt(scanner.nextLine());
+                getMax(first,secont);
+                break;
+            case "char":
+                char firstc = scanner.nextLine().charAt(0);
+                char secontc = scanner.nextLine().charAt(0);
+                getMax(firstc,secontc);
+                break;
+            case "String":
+                String firsts =scanner.nextLine();
+                String seconts = scanner.nextLine();
+                getMax(firsts,seconts);
+                break;
+        }
+    }
+
+    private static void getMax(int first, int secont) {
+        if (first > secont){
+            System.out.println(first);
+        }
+        System.out.println(secont);
+    }
+
+
+
+    private static void getMax(char firstc, char secontc) {
+        if (firstc > secontc){
+            System.out.println(firstc);
+        }
+        System.out.println(secontc);
+    }
+
+
+    private static void getMax(String firsts, String seconts) {
+        if (firsts.compareTo(seconts) >= 0){
+            System.out.println(firsts);
+        }
+        System.out.println(seconts);
+    }
+}
+
+
+
+
+
+
+
+
+
