@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Train {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] inputData = scanner.nextLine().split("\\s+");
+
+        ArrayList<Integer> numbers = new ArrayList<>();
+
+        for (int i = 0; i < inputData.length; i++) {
+            numbers.add(Integer.parseInt(inputData[i]));
+        }
+
+        int maxCapacity = Integer.parseInt(scanner.nextLine());
+
+        String input = scanner.nextLine();
+
+        while (!"end".equals(input)){
+            String[] data = input.split(" ");
+
+            if (data.length == 2){
+             int number = Integer.parseInt(data[1]);
+             numbers.add(number);
+            }else{
+                int number = Integer.parseInt(data[0]);
+
+                for (int i = 0; i <numbers.size() ; i++) {
+                    int currentElemnt = numbers.get(i);
+
+                    if (currentElemnt + number <= maxCapacity){
+                        numbers.set(i, currentElemnt + number);
+                        break;
+                    }
+                }
+            }
+            input = scanner.nextLine();
+        }
+
+        System.out.println(numbers.toString().replaceAll("[\\[,\\]]",""));
+
+
+
+
+    }
+}
