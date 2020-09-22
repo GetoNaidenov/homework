@@ -1,0 +1,46 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+       int days = Integer.parseInt(scanner.nextLine());
+       double hrana = Double.parseDouble(scanner.nextLine());
+
+       double izqdenaHrana = 0;
+       int izqdenoKuche = 0;
+       int izqdenoKote = 0;
+       double countBiscuit = 0;
+
+        for (int i = 1; i <= days; i++) {
+            int kuche = Integer.parseInt(scanner.nextLine());
+            int kote = Integer.parseInt(scanner.nextLine());
+
+            izqdenoKuche += kuche;
+            izqdenoKote += kote;
+
+            if (i % 3 == 0){
+                double bonus = (kuche + kote) * 0.10;
+                countBiscuit +=bonus;
+                izqdenaHrana += kuche + kote;
+            }else {
+                izqdenaHrana += kuche + kote;
+            }
+        }
+
+        double obshtoIzqdenaHrana = (izqdenaHrana / hrana) * 100;
+        double kucheProcent = (izqdenoKuche / izqdenaHrana) * 100;
+        double koteProcent = (izqdenoKote / izqdenaHrana) * 100;
+
+        System.out.printf("Total eaten biscuits: %dgr.%n",(int)Math.floor(countBiscuit));
+        System.out.printf("%.2f",obshtoIzqdenaHrana);
+        System.out.println("% of the food has been eaten.");
+        System.out.printf("%.2f",kucheProcent);
+        System.out.println("% eaten from the dog.");
+        System.out.printf("%.2f",koteProcent);
+        System.out.println("% eaten from the cat.");
+
+    }
+}
+
