@@ -1,0 +1,28 @@
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int food = Integer.parseInt(scanner.nextLine());
+        food = food * 1000;
+        int izqdeno = 0;
+
+        String input = scanner.nextLine();
+       while (!input.equals("Adopted")){
+
+           izqdeno += Integer.parseInt(input);
+
+           input = scanner.nextLine();
+       }
+
+       if (food >= izqdeno){
+           System.out.printf("Food is enough! Leftovers: %d grams.",(food - izqdeno));
+       }else {
+           System.out.printf("Food is not enough. You need %d grams more.",(izqdeno - food));
+       }
+    }
+}
+
