@@ -1,0 +1,34 @@
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        double maxObem = Double.parseDouble(scanner.nextLine());
+        int countBag = 0;
+        boolean free = true;
+
+        String input = scanner.nextLine();
+        while (!input.equals("End") || free == false){
+
+            double bag = Double.parseDouble(input);
+
+            if (maxObem - bag >= 0){
+                maxObem -= bag;
+                countBag ++;
+            }else {
+                System.out.println("No more space!");
+                free = false;
+                break;
+            }
+            input = scanner.nextLine();
+        }
+        if (input.equals("End")){
+            System.out.println("Congratulations! All suitcases are loaded!");
+        }
+        System.out.printf("Statistic: %d suitcases loaded.",countBag);
+    }
+}
+
