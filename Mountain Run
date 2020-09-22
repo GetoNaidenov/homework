@@ -1,0 +1,28 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+
+        double recordInSecond = Double.parseDouble(scanner.nextLine());
+        double metric = Double.parseDouble(scanner.nextLine());
+        double secondOfMetric = Double.parseDouble(scanner.nextLine());
+
+        double georgiTime = metric * secondOfMetric;
+        double georgiSlow =(Math.floor(metric/50)) * 30;
+
+      
+        double sumSecond = georgiTime + georgiSlow;
+
+        if (recordInSecond > sumSecond){
+            System.out.printf("Yes! The new record is %.2f seconds.",sumSecond);
+        }else {
+            double ostatuk =  sumSecond - recordInSecond;
+            System.out.printf("No! He was %.2f seconds slower.",ostatuk);
+        }
+
+    }
+}
+
