@@ -1,0 +1,49 @@
+import java.lang.reflect.Array;
+        import java.util.*;
+        import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int days = Integer.parseInt(scanner.nextLine());
+
+        double money = 0;
+        int daysWin = 0;
+        int daysLos = 0;
+
+        for (int i = 0; i <days ; i++) {
+            double dayMoney = 0;
+            int win = 0;
+            int los = 0;
+
+            String input = scanner.nextLine();
+            while (!input.equals("Finish")){
+                if (input.equals("win")){
+                    win++;
+                    dayMoney += 20;
+                }else if (input.equals("lose")){
+                    los++;
+                }
+                input = scanner.nextLine();
+            }
+            if (win > los){
+                daysWin++;
+                dayMoney += dayMoney * 0.1;
+            }else {
+                daysLos++;
+            }
+            money += dayMoney;
+        }
+
+        if (daysWin > daysLos) {
+            money += money * 0.20;
+            System.out.printf("You won the tournament! Total raised money: %.2f",money);
+        }else {
+            System.out.printf("You lost the tournament! Total raised money: %.2f",money);
+        }
+
+
+    }
+}
+
