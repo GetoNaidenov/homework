@@ -1,0 +1,76 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        double money = Double.parseDouble(scanner.nextLine());
+        String pow = scanner.nextLine();
+        int age = Integer.parseInt(scanner.nextLine());
+        String fit = scanner.nextLine();
+
+        double totalMoney = 0.0;
+        double otstupka = 0.0;
+        double programa = 0.0;
+
+        switch (fit){
+            case "Gym":
+                if (pow.equals("m")){
+                    programa = 42;
+                }else{
+                    programa = 35;
+                }
+                break;
+            case "Boxing":
+                if (pow.equals("m")){
+                    programa = 41;
+                }else{
+                    programa = 37;
+                }
+                break;
+            case "Yoga":
+                if (pow.equals("m")){
+                    programa = 45;
+                }else{
+                    programa = 42;
+                }
+                break;
+            case "Zumba":
+                if (pow.equals("m")){
+                    programa = 34;
+                }else{
+                    programa = 31;
+                }
+                break;
+            case "Dances":
+                if (pow.equals("m")){
+                    programa = 51;
+                }else{
+                    programa = 53;
+                }
+                break;
+            case "Pilates":
+                if (pow.equals("m")){
+                    programa = 39;
+                }else{
+                    programa = 37;
+                }
+                break;
+
+        }
+
+        if (age <= 19){
+            otstupka = programa * 0.2;
+        }
+        totalMoney = programa - otstupka;
+
+        if (totalMoney <= money){
+            System.out.printf("You purchased a 1 month pass for %s.",fit);
+        }else {
+            System.out.printf("You don't have enough money! You need $%.2f more.",totalMoney - money);
+        }
+
+    }
+}
+
