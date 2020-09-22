@@ -1,0 +1,64 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String fruit = scanner.nextLine();
+        String size = scanner.nextLine();
+        int  count = Integer.parseInt(scanner.nextLine());
+
+        double sumMoney = 0.0;
+        double otstupka = 0.0;
+        double moneyPack = 0.0;
+
+        switch (fruit){
+            case "Watermelon":
+                if (size.equals("small")){
+                    moneyPack = 2 * 56;
+                }else {
+                    moneyPack = 5 * 28.70;
+                }
+                break;
+            case "Mango":
+                if (size.equals("small")){
+                  moneyPack = 2 * 36.66;
+                }else {
+                   moneyPack = 5 * 19.60;
+                }
+                break;
+            case "Pineapple":
+                if (size.equals("small")){
+                    moneyPack = 2 * 42.10;
+                }else {
+                    moneyPack = 5 * 24.80;
+                }
+                break;
+            case "Raspberry":
+                if (size.equals("small")){
+                    moneyPack = 2 * 20;
+                }else {
+                    moneyPack = 5 * 15.20;
+                }
+                break;
+        }
+
+        sumMoney = moneyPack * count;
+
+        if (sumMoney < 400){
+            System.out.printf("%.2f lv.",sumMoney);
+        }else if (sumMoney >= 400 && sumMoney <= 1000){
+
+            otstupka = sumMoney * 0.15;
+            sumMoney = sumMoney - otstupka;
+            System.out.printf("%.2f lv.",sumMoney);
+        }else {
+            otstupka = sumMoney/2;
+            sumMoney -= otstupka;
+            System.out.printf("%.2f lv.",sumMoney);
+        }
+
+    }
+}
+
