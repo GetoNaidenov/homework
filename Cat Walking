@@ -1,0 +1,25 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+      int min = Integer.parseInt(scanner.nextLine());
+      int count = Integer.parseInt(scanner.nextLine());
+      int call = Integer.parseInt(scanner.nextLine());
+
+      int sumMinutes = min * count;
+      int sumCall = sumMinutes * 5;
+
+      int halfcall = call / 2;
+
+      if (halfcall <= sumCall){
+          System.out.printf("Yes, the walk for your cat is enough. Burned calories per day: %d.",sumCall);
+      }else{
+          System.out.printf("No, the walk for your cat is not enough. Burned calories per day: %d.",sumCall);
+      }
+
+    }
+}
+
