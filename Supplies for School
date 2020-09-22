@@ -1,0 +1,31 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+       double penPack = 5.80;
+       double marker = 7.20;
+       double preparat = 1.20;
+
+       double sum = 0;
+
+       int pens = Integer.parseInt(scanner.nextLine());
+       int packsM = Integer.parseInt(scanner.nextLine());
+       double litriPrep = Double.parseDouble(scanner.nextLine());
+       int procentOtstupka = Integer.parseInt(scanner.nextLine());
+
+       sum += penPack * pens;
+       sum += packsM * marker;
+       sum += litriPrep * preparat;
+
+      double otspuka = (sum * procentOtstupka)/100;
+      sum -= otspuka;
+
+       System.out.printf("%.3f",sum);
+
+
+    }
+}
+
