@@ -1,0 +1,110 @@
+import javax.swing.text.html.HTMLDocument;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+       ArrayDeque<Integer>males = new ArrayDeque<>();
+        ArrayDeque<Integer> females = new ArrayDeque<>();
+
+        adderStack(scanner, males);
+        adderFemale(scanner, females);
+
+        int mathes = 0;
+
+     while ((!(males.isEmpty()) || (females.isEmpty()))){
+
+         int male = males.peek();
+         int female = females.remove();
+
+         specialFemale(females, female);
+
+         if (male <= 0){
+             males.pop();
+         }
+         if (males.isEmpty()){
+             break;
+         }else {
+             male = males.peek();
+         }
+
+         if (females.isEmpty()){
+             break;
+         }
+          if (female <= 0){
+              females.remove();
+          }
+
+
+
+         mathes = getMathes(males, mathes, male, female);
+
+     }
+        System.out.printf("Matches: %d%n",mathes);
+
+        printMales(males);
+
+        if (females.isEmpty()){
+            System.out.println("Females left: none");
+        }else {
+            System.out.print("Females left: ");
+            System.out.print(females.toString().replaceAll("[\\[\\]]",""));
+            System.out.println();
+        }
+
+
+
+    }
+
+    private static void specialFemale(ArrayDeque<Integer> females, int female) {
+        if (female == 25){
+            females.remove();
+        }
+    }
+
+    private static void printMales(ArrayDeque<Integer> males) {
+        if (males.isEmpty()){
+           System.out.println("Males left: none");
+       }else {
+           System.out.print("Males left: ");
+           System.out.print(males.toString().replaceAll("[\\[\\]]",""));
+            System.out.println();
+       }
+    }
+
+    private static int getMathes(ArrayDeque<Integer> males, int mathes, int male, int female) {
+        if (male == female){
+            males.pop();
+            mathes++;
+        }else {
+            int mal = males.pop();
+            if (mal -2 <= 0){
+
+            }else {
+                males.push(mal - 2);
+            }
+        }
+        return mathes;
+    }
+
+    private static void adderFemale(Scanner scanner, ArrayDeque<Integer> female) {
+        int[] arr = Arrays.stream(scanner.nextLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+
+        for (int i = 0; i <arr.length ; i++) {
+            female.add(arr[i]);
+        }
+    }
+
+    private static void adderStack(Scanner scanner, ArrayDeque<Integer> males) {
+        int[] arr = Arrays.stream(scanner.nextLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+
+        for (int i = 0; i <arr.length ; i++) {
+            males.push(arr[i]);
+        }
+    }
+}
