@@ -1,0 +1,88 @@
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args)  {
+        Scanner scanner = new Scanner(System.in);
+        int aluminium = 0;
+        int carbonfiber = 0;
+        int glass = 0;
+        int lithium = 0;
+
+        ArrayDeque<Integer> liquids = new ArrayDeque<>();
+        ArrayDeque<Integer> physical = new ArrayDeque<>();
+
+        madeLiquids(scanner, liquids);
+        madePsyhical(scanner, physical);
+
+        while (!(liquids.isEmpty() || physical.isEmpty())){
+            int liquiItem = liquids.poll();
+            int psysicItem = physical.pop();
+
+            int sum = liquiItem + psysicItem;
+
+            switch (sum){
+                case 25:
+                    glass++;
+                    break;
+                case 50:
+                    aluminium++;
+                    break;
+                case 75:
+                    lithium++;
+                    break;
+                case 100:
+                    carbonfiber++;
+                    break;
+                default:
+                    physical.push(psysicItem + 3);
+                    break;
+            }
+         }
+
+        if (aluminium > 0 && carbonfiber > 0 && glass > 0 && lithium > 0){
+            System.out.println("Wohoo! You succeded in building the spaceship!");
+        }else {
+            System.out.println("Ugh, what a pity! You didn't have enough materials to build the spaceship.");
+        }
+
+        System.out.print("Liquids left: ");
+        if (liquids.isEmpty()){
+            System.out.println("none");
+        }else {
+            System.out.println(liquids.toString().replaceAll("[\\[\\]]",""));
+        }
+
+        System.out.print("Physical items left: ");
+        if (physical.isEmpty()){
+            System.out.println("none");
+        }else {
+            System.out.println(physical.toString().replaceAll("[\\[\\]]",""));
+        }
+        System.out.printf("Aluminium: %d%nCarbon fiber: %d%nGlass: %d%nLithium: %d%n",aluminium,carbonfiber,glass,lithium);
+
+
+
+
+
+    }
+
+    private static void madePsyhical(Scanner scanner, ArrayDeque<Integer> physical) {
+        int[] psy = Arrays.stream(scanner.nextLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+        for (int i = 0; i < psy.length; i++) {
+            physical.push(psy[i]);
+        }
+    }
+
+    private static void madeLiquids(Scanner scanner, ArrayDeque<Integer> liquids) {
+        int[] liquid = Arrays.stream(scanner.nextLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+        for (int i = 0; i < liquid.length; i++) {
+            liquids.offer(liquid[i]);
+        }
+    }
+}
+
