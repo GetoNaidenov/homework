@@ -1,0 +1,128 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        Map<String,Integer> harvested = new LinkedHashMap<>();
+        harvested.put("Carrots",0);
+        harvested.put("Potatoes",0);
+        harvested.put("Letuce",0);
+        harvested.put("Harmed vegetables",0);
+
+        int size = Integer.parseInt(scanner.nextLine());
+
+        String[][] matrix = new String[size][];
+        madeMatrix(scanner, size, matrix);
+
+        String input = scanner.nextLine();
+        while (!input.equals("End of Harvest")){
+
+            String[] commands = input.split(" ");
+            String command = commands[0];
+
+            switch (command){
+                case "Harvest":
+                    int col = Integer.parseInt(commands[1]);
+                    int rol = Integer.parseInt(commands[2]);
+
+                    if (col < size) {
+                        String harvet = matrix[col][rol];
+
+                        switch (harvet) {
+                            case "L":
+                                harvested.put("Letuce", harvested.get("Letuce") + 1);
+                                break;
+                            case "P":
+                                harvested.put("Potatoes", harvested.get("Potatoes") + 1);
+                                break;
+                            case "C":
+                                harvested.put("Carrots", harvested.get("Carrots") + 1);
+                                break;
+                        }
+                        matrix[col][rol] = " ";
+                    }
+                        break;
+                case "Mole":
+                    int colH = Integer.parseInt(commands[1]);
+                    int rolH = Integer.parseInt(commands[2]);
+
+                    String polus = commands[3];
+                    int count = 0;
+                    switch (polus){
+                        case "up":
+                            for (int i = colH; i > 0 ; i--) {
+                                if (count % 2 == 0){
+                                    if (!matrix[i][rolH].equals(" ")){
+                                        harvested.put("Harmed vegetables",harvested.get("Harmed vegetables") + 1);
+                                        matrix[i][rolH] = " ";
+                                    }
+                                }
+                                count++;
+                            }
+                            break;
+                        case "down":
+                            for (int i = colH; i < size ; i++) {
+                                if (count % 2 == 0){
+                                    if (!matrix[i][rolH].equals(" ")){
+                                        harvested.put("Harmed vegetables",harvested.get("Harmed vegetables") + 1);
+                                        matrix[i][rolH] = " ";
+                                    }
+                                }
+                                count++;
+                            }
+                            break;
+                        case "left":
+                            for (int i = rolH; i > 0 ; i--) {
+                                if (count % 2 == 0){
+                                    if (!matrix[colH][i].equals(" ")){
+                                        harvested.put("Harmed vegetables",harvested.get("Harmed vegetables") + 1);
+                                        matrix[colH][i] = " ";
+                                    }
+                                }
+                                count++;
+                            }
+                            break;
+                        case "right":
+                            for (int i = rolH; i < matrix[colH].length ; i++) {
+                                if (count % 2 == 0){
+                                    if (!matrix[colH][i].equals(" ")){
+                                        harvested.put("Harmed vegetables",harvested.get("Harmed vegetables") + 1);
+                                        matrix[colH][i] = " ";
+                                    }
+                                }
+                                count++;
+                            }
+                            break;
+                    }
+
+                    break;
+            }
+
+            input = scanner.nextLine();
+        }
+        printMatrix( size, matrix);
+
+        for (Map.Entry<String,Integer>entry :harvested.entrySet()) {
+            System.out.printf("%s: %d%n",entry.getKey(),entry.getValue());
+        }
+
+
+    }
+
+    private static void printMatrix( int size, String[][] matrix) {
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j <matrix[i].length ; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    private static void madeMatrix(Scanner scanner, int size, String[][] matrix) {
+        for (int i = 0; i < size ; i++) {
+            matrix[i] = scanner.nextLine().split(" ");
+        }
+    }
+}
