@@ -1,0 +1,67 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int[] dimestions = Arrays.stream(scanner.nextLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+
+        int rols = dimestions[0];
+        int cols = dimestions[1];
+
+        int[][] matrix = new int[rols][cols];
+
+        int value = 0;
+        for (int i = 0; i < rols; i++) {
+            for (int j = 0; j < cols; j++) {
+                matrix[i][j] = value++;
+            }
+        }
+
+        String command = scanner.nextLine();
+        
+        long starPower = 0;
+        
+        while (!command.equals("Let the Force be with you")) {
+            
+            int[] playerPosition = Arrays.stream(command.split(" "))
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
+            
+            int[] enemiPosition = Arrays.stream(scanner.nextLine().split(" "))
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
+            
+            int enemiRow = enemiPosition[0];
+            int enemiCol = enemiPosition[1];
+
+            while (enemiRow >= 0 && enemiCol >= 0) {
+                if (enemiRow < matrix.length && enemiCol < matrix[0].length) {
+                    matrix[enemiRow][enemiCol] = 0;
+                }
+                enemiRow--;
+                enemiCol--;
+            }
+
+            int playerRow = playerPosition[0];
+            int playerCol = playerPosition[1];
+
+            while (playerRow >= 0 && playerCol < matrix[1].length) {
+                if (playerRow < matrix.length && playerCol >= 0 && playerCol < matrix[0].length) {
+                    starPower += matrix[playerRow][playerCol];
+                }
+
+                playerCol++;
+                playerRow--;
+            }
+
+            command = scanner.nextLine();
+        }
+
+        System.out.println(starPower);
+
+    }
+}
