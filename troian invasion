@@ -1,0 +1,67 @@
+import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = Integer.parseInt(scanner.nextLine());
+
+       List<Integer> deffender = Arrays.stream(scanner.nextLine().split(" "))
+               .map(Integer::parseInt).collect(Collectors.toList());
+
+       int index = 0;
+
+
+
+        for (int i = 0; i < n ; i++) {
+
+            index++;
+
+            int[] warior = Arrays.stream(scanner.nextLine().split(" "))
+                    .mapToInt(Integer::parseInt).toArray();
+
+            if (index % 3 == 0) {
+                deffender.add(Integer.parseInt(scanner.nextLine()));
+            }
+
+
+            for (int j = warior.length - 1; j >= 0; j--) {
+
+                int deff = deffender.get(0);
+                int war = warior[j];
+
+                if (deffender.isEmpty()) {
+                    System.out.println("The Trojans successfully destroyed the Spartan defense.");
+                    System.out.println("Wariors left: ");
+                    System.out.print(warior.toString().replaceAll("\\[|,|\\]", ""));
+                    break;
+                }
+
+                if (deff > war) {
+                    deffender.set(0, (deff - war));
+
+                } else if (deff < war) {
+                    warior[j] = war - deff;
+                    deffender.remove(0);
+
+                } else {
+                    deffender.remove(0);
+                }
+
+            }
+
+        }
+
+            System.out.println("The Spartans successfully repulsed the Trojan attack.");
+            System.out.println("Plates left: ");
+            System.out.print(deffender.toString().replaceAll("\\[|,|\\]", ""));
+
+
+
+    }
+}
+
