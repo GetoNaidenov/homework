@@ -1,0 +1,86 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayDeque<Integer> malestack = new ArrayDeque<>();
+        ArrayDeque<Integer>femaleque = new ArrayDeque<>();
+
+        int math = 0;
+        setMale(scanner, malestack);
+        setFemale(scanner, femaleque);
+
+        while (!(malestack.isEmpty() || femaleque.isEmpty())){
+            int male = malestack.pop();
+            int female = femaleque.poll();
+
+            if (male <= 0){
+                if (!femaleque.isEmpty()) {
+                    male = malestack.pop();
+                }
+            }
+            if (female <= 0){
+                if (!femaleque.isEmpty()){
+                female = femaleque.poll();
+            }
+
+            }
+            if (male == 25){
+              malestack.pop();
+
+            }
+            if (female == 25){
+                femaleque.poll();
+                femaleque.poll();
+
+            }
+            if ( male == female){
+                math++;
+            }else {
+                if (male - 2 <= 0) {
+
+                } else{
+                    malestack.push(male - 2);
+            }
+            }
+
+        }
+
+        System.out.printf("Matches: %d%n",math);
+        System.out.print("Males left:");
+        if (!malestack.isEmpty()){
+            System.out.print(malestack.toString().replaceAll("[\\[\\]]",""));
+        }else {
+            System.out.println("none");
+        }
+
+
+        System.out.print("Females left:");
+        if (!femaleque.isEmpty()){
+            System.out.print(femaleque.toString().replaceAll("[\\[\\]]",""));
+        }else {
+            System.out.println("none");
+        }
+
+
+
+    }
+
+    private static void setFemale(Scanner scanner, ArrayDeque<Integer> femaleque) {
+        int [] female = Arrays.stream(scanner.nextLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+        for (int i = 0; i <female.length ; i++) {
+            femaleque.offer(female[i]);
+        }
+    }
+
+    private static void setMale(Scanner scanner, ArrayDeque<Integer> malestack) {
+        int[]male = Arrays.stream(scanner.nextLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+        for (int i = 0; i < male.length ; i++) {
+            malestack.push(male[i]);
+        }
+    }
+}
