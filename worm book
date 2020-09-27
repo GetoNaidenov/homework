@@ -1,0 +1,130 @@
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args)  {
+        Scanner scanner = new Scanner(System.in);
+
+        String txt = scanner.nextLine();
+
+
+        int size = Integer.parseInt(scanner.nextLine());
+
+        String[][] matrix = new String[size][size];
+
+        makeMatrix(scanner, size, matrix);
+
+      int[] player =  getPlayer(size, matrix);
+        int plRol = player[0];
+        int plCol = player[1];
+
+
+        String input = scanner.nextLine();
+        while (!input.equals("end")){
+
+            switch (input){
+                case "down":
+                   if (plRol + 1 < size){
+                       matrix[plRol][plCol] = "-";
+                       plRol += 1;
+                       if (!matrix[plRol][plCol].equals("-")){
+                           txt += matrix[plRol][plCol];
+
+                       }
+                       matrix[plRol][plCol] = "P";
+                   }else {
+                       txt = getString(txt);
+                   }
+                    break;
+                case "up":
+                    if (plRol - 1 >= 0){
+                        matrix[plRol][plCol] = "-";
+                        plRol -= 1;
+                        if (!matrix[plRol][plCol].equals("-")){
+                            txt += matrix[plRol][plCol];
+
+                        }
+                        matrix[plRol][plCol] = "P";
+                    }else {
+                        txt = getString(txt);
+                    }
+
+                    break;
+                case "left":
+                    if (plCol -1 >= 0){
+                        matrix[plRol][plCol] = "-";
+                        plCol -= 1;
+
+                        if (!matrix[plRol][plCol].equals("-")){
+                            txt += matrix[plRol][plCol];
+                        }
+                        matrix[plRol][plCol] = "P";
+                    }else {
+                        txt = getString(txt);
+                    }
+                    break;
+                case "right":
+                    if (plCol +1 >= 0){
+                        matrix[plRol][plCol] = "-";
+                        plCol += 1;
+
+                        if (!matrix[plRol][plCol].equals("-")){
+                            txt += matrix[plRol][plCol];
+                        }
+                        matrix[plRol][plCol] = "P";
+                    }else {
+                        txt = getString(txt);
+                    }
+                    break;
+            }
+
+
+
+
+            input = scanner.nextLine();
+        }
+        printMatrix(txt,size, matrix);
+    }
+
+    private static String getString(String txt) {
+        String[] report = txt.split("");
+             String txtnew ="";
+        for (int i = 0; i <report.length -1 ; i++) {
+            txtnew += report[i];
+        }
+
+        return txtnew;
+    }
+
+    private static void printMatrix(String txt,int size, String[][] matrix) {
+        System.out.println(txt);
+        for (int i = 0; i < size ; i++) {
+            for (int j = 0; j < size ; j++) {
+                System.out.print(matrix[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    private static int[] getPlayer(int size, String[][] matrix) {
+        int[] player = new int[2];
+
+        for (int i = 0; i <size ; i++) {
+            for (int j = 0; j < size; j++) {
+
+                if (matrix[i][j].equals("P")){
+                    player[0] = i;
+                   player[1] = j;
+                }
+            }
+        }
+        return player;
+    }
+
+    private static void makeMatrix(Scanner scanner, int size, String[][] matrix) {
+        for (int i = 0; i < size ; i++) {
+            matrix[i] = scanner.nextLine().split("");
+        }
+    }
+}
+
