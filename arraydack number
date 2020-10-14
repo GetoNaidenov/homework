@@ -1,0 +1,41 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+
+        ArrayDeque<Integer> numbers = new ArrayDeque<>();
+
+        String[] arr = scanner.nextLine().split(" ");
+
+        for (int i = 0; i < arr.length ; i++) {
+
+            if (Character.isDigit(arr[i].charAt(0))){
+                numbers.push(Integer.parseInt(arr[i]));
+            }else {
+                if (arr[i].charAt(0) == '+'){
+                    int left = numbers.peek();
+                    int right = Integer.parseInt(arr[i + 1]);
+                    int result = left + right;
+                    numbers.pop();
+                    numbers.push(result);
+                    i++;
+
+                }else if (arr[i].charAt(0) == '-'){
+                    int left = numbers.peek();
+                    int right = Integer.parseInt(arr[i + 1]);
+                    int result = left - right;
+                    numbers.pop();
+                    numbers.push(result);
+                    i++;
+                }
+
+            }
+
+        }
+        System.out.println(numbers.peek());
+
+
+    }
+}
