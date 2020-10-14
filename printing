@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        ArrayDeque<String> queqe = new ArrayDeque<>();
+
+        String line = scanner.nextLine();
+
+        while (!line.equals("print")){
+
+            if (line.equals("cancel")){
+                queqe.pollFirst();
+            }else {
+                queqe.offer(line);
+            }
+            line = scanner.nextLine();
+        }
+
+        System.out.println("Printer is on standby");
+
+        while (!queqe.isEmpty()){
+            System.out.println(queqe.pollFirst());
+        }
+
+
+    }
+}
