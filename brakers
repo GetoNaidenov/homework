@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+       ArrayDeque<Integer> brackers = new ArrayDeque<>();
+
+       String []arr = scanner.nextLine().split("");
+
+        for (int i = 0; i < arr.length ; i++) {
+
+            String charar = arr[i];
+
+            if (charar.equals("(")){
+                brackers.push(i);
+            }else if (charar.equals(")")){
+                int start = brackers.pop();
+                for (int j = start; j <= i ; j++) {
+                    System.out.print(arr[j]);
+                }
+                System.out.println();
+
+            }
+
+
+        }
+
+
+
+
+    }
+}
