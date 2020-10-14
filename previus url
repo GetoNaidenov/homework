@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+    ArrayDeque<String> stack = new ArrayDeque<>();
+    ArrayDeque<String> queqe = new ArrayDeque<>();
+
+    String line = scanner.nextLine();
+
+    while (!line.equals("Home")){
+
+        if (line.equals("forward")){
+            if (queqe.isEmpty()){
+                System.out.println("no next URLs");
+            }else {
+                System.out.println(queqe.remove());
+            }
+        }else if (line.equals("back")){
+            if (stack.isEmpty()){
+                System.out.println("no previous URLs");
+            }else {
+                queqe.offer(stack.pop());
+                System.out.println(stack.peek());
+            }
+        }else {
+            stack.push(line);
+            System.out.println(line);
+        }
+
+
+
+
+        line = scanner.nextLine();
+    }
+
+
+
+
+
+
+
+
+    }
+}
