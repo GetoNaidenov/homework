@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        Set<Integer> n = new HashSet<>();
+        Set<Integer> m = new HashSet<>();
+
+        int[] commands = Arrays.stream(scanner.nextLine().split("\\s+"))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+
+        int nSize = commands[0];
+        int mSize = commands[1];
+
+        for (int i = 0; i < nSize ; i++) {
+            n.add(Integer.parseInt(scanner.nextLine()));
+        }
+        for (int i = 0; i <mSize ; i++) {
+            m.add(Integer.parseInt(scanner.nextLine()));
+        }
+
+        for (int num: n) {
+            if (m.contains(num)){
+                System.out.print(num + " ");
+            }
+        }
+
+
+    }
+}
