@@ -1,0 +1,64 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+       Map<String,Integer> nameAndValue = new LinkedHashMap<>();
+
+       String input = scanner.nextLine();
+
+       while (!input.equals("JOKER")){
+
+           int count = 0;
+
+           String[] nameAndCards = input.split(":");
+
+           String name = nameAndCards[0];
+
+           String[]cards = nameAndCards[1].split(",");
+
+           for (int i = 0; i < cards.length ; i++) {
+
+               String[] card = cards[i].split("");
+               int cardNum = 0;
+               String cardColor = "";
+               if (card.length == 2){
+                   cardNum = Integer.parseInt(card[0]);
+                   cardColor = card[1];
+               }else {
+                   cardNum = 10;
+                   cardColor = card[2];
+               }
+
+               switch (cardColor){
+                   case "S":
+                       count += cardNum * 4;
+                       break;
+                   case "H":
+                       count += cardNum * 3;
+                       break;
+                   case "D":
+                       count += cardNum * 2;
+                       break;
+               }
+           }
+
+           if (!nameAndValue.containsKey(name)){
+               nameAndValue.put(name,count);
+           }else {
+               nameAndValue.put(name,nameAndValue.get(name) + count);
+           }
+           input = scanner.nextLine();
+       }
+
+        for (Map.Entry<String,Integer>entry:nameAndValue.entrySet()) {
+            System.out.printf("%s: %d%n",entry.getKey(),entry.getValue());
+        }
+
+
+
+
+          }
+        }
+
