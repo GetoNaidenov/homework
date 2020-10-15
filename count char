@@ -1,0 +1,34 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        Map<Character,Integer> countSymbols = new TreeMap<>();
+
+        String input = scanner.nextLine();
+
+        char[] simbols = input.toCharArray();
+
+        for (int i = 0; i < simbols.length ; i++) {
+
+            if (!countSymbols.containsKey(simbols[i])){
+                countSymbols.put(simbols[i],1);
+            }else {
+                countSymbols.put(simbols[i],countSymbols.get(simbols[i])+1);
+            }
+        }
+
+        for (Map.Entry<Character, Integer> entry: countSymbols.entrySet()) {
+
+            System.out.printf("%c: %d time/s%n",entry.getKey(),entry.getValue());
+        }
+
+
+
+
+
+          }
+        }
+
