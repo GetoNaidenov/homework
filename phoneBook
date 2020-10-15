@@ -1,0 +1,57 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        Map<String,String> phoneBoock = new HashMap<>();
+
+        String input = scanner.nextLine();
+
+        while (!input.equals("search")){
+
+            String[] nameAndNumber = input.split("-");
+
+            String name = nameAndNumber[0];
+            String number = nameAndNumber[1];
+
+            if (!phoneBoock.containsKey(name)){
+                phoneBoock.put(name,number);
+            }else {
+                phoneBoock.put(name,number);
+            }
+            input = scanner.nextLine();
+        }
+
+        input = scanner.nextLine();
+
+
+        while (!input.equals("stop")){
+
+            boolean getNumber = false;
+
+            for (Map.Entry<String,String> entry:phoneBoock.entrySet()) {
+
+            if (phoneBoock.containsKey(input)){
+                System.out.printf("%s -> %s%n",entry.getKey(),entry.getValue());
+                getNumber = true;
+            }
+        }
+            if (getNumber == false){
+                System.out.printf("Contact %s does not exist.%n",input);
+            }
+
+
+            input = scanner.nextLine();
+        }
+
+
+
+
+
+
+
+
+          }
+        }
+
