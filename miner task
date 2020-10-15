@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        Map<String,Integer> minerTask = new LinkedHashMap<>();
+
+        String resourse = scanner.nextLine();
+        while (!resourse.equals("stop")){
+
+            int quantiny = Integer.parseInt(scanner.nextLine());
+
+            if (!minerTask.containsKey(resourse)){
+                minerTask.put(resourse,quantiny);
+            }else {
+                minerTask.put(resourse,minerTask.get(resourse)+ quantiny);
+            }
+            resourse= scanner.nextLine();
+        }
+
+        for (Map.Entry<String,Integer> entry:minerTask.entrySet()) {
+            System.out.printf("%s -> %d%n",entry.getKey(),entry.getValue());
+        }
+
+
+
+          }
+        }
+
