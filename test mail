@@ -1,0 +1,34 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        Map<String,String> validRegister = new LinkedHashMap<>();
+
+        String name = scanner.nextLine();
+
+        while (!name.equals("stop")){
+
+            String email = scanner.nextLine();
+
+            String[] fix = email.split("\\.");
+
+            if (fix[1].equals("bg")){
+                validRegister.put(name,email);
+            }
+            name = scanner.nextLine();
+        }
+
+        for (Map.Entry<String,String>entry:validRegister.entrySet()) {
+            System.out.printf("%s -> %s%n",entry.getKey(),entry.getValue());
+        }
+
+
+
+
+
+
+          }
+        }
+
