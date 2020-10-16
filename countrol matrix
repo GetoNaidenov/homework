@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int[]rowsAndCows = Arrays.stream(scanner.nextLine().split(","))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+        int cols = rowsAndCows[0];
+        int rows = rowsAndCows[1];
+
+        int[][] matrix = new int[cols][rows];
+
+        int sum = 0;
+        int countCols = 0;
+        int countRols = 0;
+
+        for (int i = 0; i < cols ; i++) {
+            matrix[i] = Arrays.stream(scanner.nextLine().split(","))
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
+        }
+
+        for (int i = 0; i < cols -1; i++) {
+            for (int j = 0; j < rows -1; j++) {
+                int sumer = matrix[i][j] + matrix[i][j +1]
+                        + matrix[i +1][j] + matrix[i +1][j +1];
+
+                if (sumer > sum){
+                    sum = sumer;
+                    countCols = i;
+                    countRols = j;
+                }
+            }
+        }
+
+        System.out.printf("%d %d%n",matrix[countCols][countRols],matrix[countCols][countRols +1]);
+        System.out.printf("%d %d%n",matrix[countCols+1][countRols],matrix[countCols+1][countRols+1]);
+        System.out.println(sum);
+
+
+    }
+}
