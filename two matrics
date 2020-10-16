@@ -1,0 +1,47 @@
+   int[][] firstMatrix = getInts(scanner);
+
+        int[][] secondMatrix = getInts(scanner);
+
+        boolean win = true;
+
+        for (int r = 0; r < firstMatrix.length ; r++) {
+            if (firstMatrix.length != secondMatrix.length){
+                System.out.println("not equal");
+                break;
+            }
+            for (int c = 0; c < firstMatrix[r].length ; c++) {
+                if (firstMatrix[r].length != secondMatrix[r].length){
+                    win = false;
+
+                }else {
+                    if (firstMatrix[r][c] != secondMatrix[r][c]){
+                        win = false;
+                    }
+                }
+            }
+        }
+        if (win == true){
+            System.out.println("equal");
+        }else {
+            System.out.println("not equal");
+        }
+
+
+
+
+
+    }
+
+    private static int[][] getInts(Scanner scanner) {
+        int rolws = scanner.nextInt();
+        int cols = scanner.nextInt();
+        scanner.nextLine();
+        int[][] firstMatrix = new int[rolws][cols];
+
+        for (int r = 0; r < rolws; r++) {
+            firstMatrix[r] = Arrays.stream(scanner.nextLine().split(" "))
+                    .mapToInt(Integer::parseInt).toArray();
+        }
+        return firstMatrix;
+    }
+}
