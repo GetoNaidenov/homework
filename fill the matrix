@@ -1,0 +1,76 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+
+        String[] input = scanner.nextLine().split(", ");
+
+        int size = Integer.parseInt(input[0]);
+        String command = input[1];
+
+        int[][] matrix ;
+
+        if (command.equals("A")){
+            matrix = fillPaternA(size);
+        }else {
+            matrix = fillPaternB(size);
+
+        }
+
+        for (int r = 0; r < size ; r++) {
+            for (int c = 0; c <size ; c++) {
+                System.out.print(matrix[r][c]);
+            }
+            System.out.println();
+        }
+
+    }
+    private static int[][] fillPaternA(int size) {
+
+        int[][] matrix = new int[size][size];
+
+        int value = 1;
+        for (int col = 0; col < size ; col++) {
+            for (int row = 0; row < size; row++) {
+                matrix[row][col] = value++;
+            }
+        }
+        return matrix;
+    }
+
+
+
+
+    private static int[][] fillPaternB(int size) {
+        int[][] matrix = new int[size][size];
+
+        int value =1;
+
+        for (int c = 0; c < size ; c++) {
+            if (c % 2 == 0){
+                for (int r = 0; r < size; r++) {
+                     matrix[r][c] = value++;
+                }
+            }else {
+                for (int r = size -1; r >= 0; r--) {
+                    matrix[r][c] = value++;
+                }
+            }
+
+        }
+
+
+
+
+        return matrix ;
+    }
+
+
+}
+
