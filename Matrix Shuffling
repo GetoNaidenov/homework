@@ -1,0 +1,65 @@
+
+import java.util.Arrays;
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+         int rols = scanner.nextInt();
+         int cols = scanner.nextInt();
+         scanner.nextLine();
+
+         String[][] matrix = new String[rols][cols];
+
+        for (int i = 0; i < matrix.length ; i++) {
+            matrix[i] = scanner.nextLine().split(" ");
+        }
+
+        String input = scanner.nextLine();
+
+        while (!input.equals("END")){
+
+            String[] commands = input.split(" ");
+
+            if (commands.length < 5){
+                System.out.println("Invalid input!");
+
+            }else if (commands[0].equals("swap")){
+
+
+                int startRols =Integer.parseInt( commands[1]);
+                int startCols = Integer.parseInt(commands[2]);
+
+                int endROls = Integer.parseInt(commands[3]);
+                int endCols = Integer.parseInt(commands[4]);
+
+                if (startRols > matrix.length || startCols > matrix.length || endROls> matrix.length || endCols > matrix.length){
+                    System.out.println("Invalid input!");
+                }else {
+
+                String str = matrix[startRols][startCols];
+                String str2 = matrix[endROls][endCols];
+
+                matrix[startRols][startRols] = str2;
+                matrix[endROls][endCols] = str;
+                    printMatrix(matrix);
+            }
+
+            }
+            input = scanner.nextLine();
+        }
+
+
+
+    }
+
+    private static void printMatrix(String[][] matrix) {
+        for (int i = 0; i < matrix.length ; i++) {
+            for (int j = 0; j < matrix[i].length ; j++) {
+                System.out.print(matrix[i][j]+ " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
