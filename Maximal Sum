@@ -1,0 +1,53 @@
+
+import java.util.Arrays;
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+         int rols = scanner.nextInt();
+         int cols = scanner.nextInt();
+         scanner.nextLine();
+         int sum = 0;
+         int rolser = 0;
+         int colser = 0;
+
+         int[][] matrix = new int[rols][cols];
+
+        for (int i = 0; i < rols; i++) {
+            matrix[i] = Arrays.stream(scanner.nextLine().split(" "))
+                    .mapToInt(Integer::parseInt).toArray();
+        }
+
+        for (int r = 0; r < matrix.length -2; r++) {
+            for (int c = 0; c <matrix[r].length -2 ; c++) {
+
+              int  sumer = matrix[r][c] + matrix[r][c +1] + matrix[r][c+2]
+              + matrix[r+1][c] + matrix[r+1][c +1] + matrix[r+1][c+2]
+              + matrix[r+2][c] + matrix[r+2][c +1] + matrix[r+2][c+2];
+
+              if (sumer > sum){
+                  sum = sumer;
+                  rolser = r;
+                  colser = c;
+              }
+
+            }
+        }
+
+        System.out.println("Sum = " + sum);
+
+        for (int r = rolser; r < rolser + 3; r++) {
+            for (int c = colser; c < colser +3; c++) {
+
+                System.out.print(matrix[r][c]+" ");
+            }
+            System.out.println();
+        }
+
+
+
+
+    }
+}
+
