@@ -1,0 +1,41 @@
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+     TreeSet<String>carBumbers = new TreeSet<>();
+
+     String input = scanner.nextLine();
+
+     while (!input.equals("END")){
+
+         String[] patern = input.split(", ");
+         String comand = patern[0];
+         String number = patern[1];
+
+         switch (comand){
+             case "IN":
+                 if (!carBumbers.contains(number)) {
+                     carBumbers.add(number);
+                 }
+                 break;
+             case "OUT":
+                 if (carBumbers.contains(number)){
+                     carBumbers.remove(number);
+                 }
+                 break;
+         }
+        input = scanner.nextLine();
+     }
+        if (carBumbers.isEmpty()){
+            System.out.println("Parking Lot is Empty");
+        }else {
+            for (String car: carBumbers) {
+                System.out.println(car);
+            }
+        }
+    }
+}
+
