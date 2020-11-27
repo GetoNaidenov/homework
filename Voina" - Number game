@@ -1,0 +1,51 @@
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+    LinkedHashSet<String> vipGuest = new LinkedHashSet<>();
+    TreeSet<String>guest = new TreeSet<>();
+
+    String input = scanner.nextLine();
+
+    while (!input.equals("PARTY")){
+
+        char inVip = input.charAt(0);
+
+        if (Character.isDigit(inVip)){
+            vipGuest.add(input);
+        }else {
+            guest.add(input);
+        }
+        input = scanner.nextLine();
+    }
+
+    input = scanner.nextLine();
+    while (!input.equals("END")){
+
+        if (vipGuest.contains(input)){
+            vipGuest.remove(input);
+        }else {
+            guest.remove(input);
+        }
+        input = scanner.nextLine();
+    }
+
+    int n = vipGuest.size() + guest.size();
+
+        System.out.println(n);
+        for (String vip:vipGuest) {
+            System.out.println(vip);
+        }
+        for (String gur:guest) {
+            System.out.println(gur);
+        }
+
+
+
+
+    }
+}
+
