@@ -1,0 +1,37 @@
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+    Map<String,List<Double>> nameAndGrade = new LinkedHashMap<>();
+
+    int n = Integer.parseInt(scanner.nextLine());
+
+        for (int i = 0; i < n ; i++) {
+
+            String[]nameGrade = scanner.nextLine().split(" ");
+            String name = nameGrade[0];
+            double grade = Double.parseDouble(nameGrade[1]);
+
+            if (!nameAndGrade.containsKey(name)){
+                nameAndGrade.put(name,new ArrayList<>());
+
+                 nameAndGrade.get(name).add(grade);
+            }else {
+                nameAndGrade.get(name).add(grade);
+            }
+        }
+
+        for (Map.Entry<String, List<Double>> entry:  nameAndGrade.entrySet()) {
+            System.out.println(entry + " -> " + nameAndGrade.get(entry));
+
+
+        }
+
+
+
+    }
+}
+
