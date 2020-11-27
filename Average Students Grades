@@ -1,0 +1,34 @@
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        LinkedHashMap<Double,Integer> numbers = new LinkedHashMap<>();
+
+   double[] nums = Arrays.stream(scanner.nextLine().split(" "))
+           .mapToDouble(Double::parseDouble).toArray();
+
+        for (int i = 0; i < nums.length ; i++) {
+
+            double num = nums[i];
+
+            if (!numbers.containsKey(num)){
+                numbers.put(num,1);
+            }else {
+                numbers.put(num,numbers.get(num) +1);
+            }
+        }
+
+        for (Map.Entry<Double,Integer> entry: numbers.entrySet()) {
+
+            System.out.println(entry.getKey()+ " -> " +entry.getValue());
+
+        }
+
+
+
+    }
+}
+
