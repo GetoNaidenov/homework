@@ -1,0 +1,88 @@
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    
+    private static String singer = "";
+    private static String venue = "";
+    private static long tickets = 0;
+    private static long price = 0;
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+     String line = scanner.nextLine();
+     
+     Map<String,Map<String,Long> >concerts = new LinkedHashMap<>();
+     
+     while (!line.equals("End")) {
+
+         if (isInputIsValid(line)) {
+             if (!concerts.containsKey(venue)) {
+                 concerts.put(venue, new LinkedHashMap<>());
+                 concerts.get(venue).put(singer, tickets * price);
+             } else {
+                 if (!concerts.get(venue).containsKey(singer)){
+                     concerts.get(venue).put(singer, tickets * price);
+                 }else {
+                     concerts.get(venue).put(singer,concerts.get(venue).get(singer) + tickets * price);
+                 }
+             }
+         }
+         line = scanner.nextLine();
+     }
+     
+     concerts.entrySet().forEach(entry -> {
+         System.out.println(entry.getKey());
+         
+         entry
+                 .getValue()
+                 .entrySet()
+                 .stream()
+                 .sorted((f,s)->
+             s.getValue().compareTo(f.getValue()))
+                 .forEach(innerEntry -> {
+                     System.out.printf("# %s -> %d%n",innerEntry.getKey(),innerEntry.getValue());
+                 });
+     } );
+    }
+
+    private static boolean isInputIsValid(String line) {
+        
+        boolean isValid = true;
+        
+        int atIndex = line.indexOf(" @");
+         
+        if (atIndex == -1){
+           isValid = false;
+        }else {
+          singer = line.substring(0,atIndex);
+        }
+        int lastInValIndex = line.lastIndexOf(' ');
+        
+        
+        if (lastInValIndex != -1){
+            String priceText = line.substring(lastInValIndex +1);
+        price = Integer.parseInt(priceText);
+        }else {
+            isValid = false;
+        }
+        if (atIndex != -1) {
+            String midle = line.substring(atIndex + 2, lastInValIndex);
+            int tickedIndex = midle.lastIndexOf(" ");
+
+
+            if (tickedIndex != -1) {
+                String countAsText = midle.substring(tickedIndex + 1);
+                tickets = Integer.parseInt(countAsText);
+                venue = midle.substring(0, tickedIndex);
+            }else {
+                isValid = false;
+            }
+            
+        }
+        return isValid;
+    }
+}
+
