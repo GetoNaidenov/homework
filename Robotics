@@ -1,0 +1,52 @@
+import com.sun.jdi.Value;
+
+import java.lang.reflect.Array;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+
+      int [] commands = Arrays.stream(scanner.nextLine().split(" "))
+              .mapToInt(e ->Integer.parseInt(e))
+              .toArray();
+
+      int maxNum = commands[0];
+      int blockNum = commands[1];
+      int containsNum = commands[2];
+
+      ArrayDeque<Integer> queue = new ArrayDeque<>();
+
+      Arrays.stream(scanner.nextLine().split(" "))
+              .mapToInt(e -> Integer.parseInt(e))
+              .limit(maxNum)
+              .forEach(queue::add);
+
+      int count = queue.size() - blockNum;
+
+        for (int i = count; i <= queue.size(); i++) {
+                queue.remove();
+        }
+
+        if (queue.size() == blockNum){
+            for (int i = 0; i < queue.size(); i++) {
+                queue.remove();
+            }
+        }
+
+        if (queue.contains(containsNum)){
+            System.out.println("true");
+        }else if (queue.isEmpty()){
+            System.out.println("0");
+        }else {
+            System.out.println(Collections.min(queue));
+        }
+
+
+
+    }
+}
