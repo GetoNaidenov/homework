@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+
+       ArrayDeque<Integer> numbers = new ArrayDeque<>();
+
+       String[] input = scanner.nextLine().split("\\s+");
+
+        for (int i = 0; i < input.length ; i++) {
+            numbers.push(Integer.parseInt(input[i]));
+        }
+
+        while (!numbers.isEmpty()){
+            System.out.print(numbers.pop()+ " ");
+
+        }
+
+
+    }
+
+}
