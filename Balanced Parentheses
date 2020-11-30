@@ -1,0 +1,74 @@
+import com.sun.jdi.Value;
+
+import java.lang.reflect.Array;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+
+     String[] robotsWithTime = scanner.nextLine().split(";");
+
+        Map<String,Integer> robots = new LinkedHashMap<>();
+
+        int[] processTime = new int[robotsWithTime.length];
+
+        for (String robot: robotsWithTime) {
+            String[] data = robot.split("-");
+            robots.put(data[0],Integer.parseInt(data[1]));
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm:ss");
+        LocalTime localTime = LocalTime.parse(scanner.nextLine(),formatter);
+
+        ArrayDeque<String> queue = new ArrayDeque<>();
+
+        String line = scanner.nextLine();
+
+        while (!line.equals("End")){
+            queue.offer(line);
+            line = scanner.nextLine();
+      }
+
+        long time = 0;
+
+       while (!queue.isEmpty()){
+          localTime = localTime.plusSeconds(1);
+           String product = queue.poll();
+
+           for (int i = 0; i < processTime.length ; i++) {
+               if (processTime[i] < 0){
+                   processTime[i] --;
+               }
+               if (processTime[i] == 0){
+               }
+           }
+           int i = 0;
+           boolean isTakaken = false;
+           for (var robot: robots.entrySet()){
+
+               if (processTime[i] == 0){
+                   processTime[i] = robot.getValue();
+                   print(robot.getKey(),product,localTime);
+                   isTakaken = true;
+                   break;
+               }
+                i++;
+           }
+              if (!isTakaken){
+                  queue.offer(product);
+              }
+
+       }
+
+    }
+
+    private static void print(String robot,String product,LocalTime time){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm:ss");
+        
+        System.out.println(String.format("%s - %s [%s]",robot,product,time.format(formatter)));
+    }
+
+}
