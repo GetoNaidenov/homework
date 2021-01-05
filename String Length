@@ -1,0 +1,14 @@
+function solve(arr,arr2,arr3){
+let sumLength;
+let averageLength;
+
+let firstLength = arr.length;
+let secondLength = arr2.length;
+let thirdArgumentLength = arr3.length;
+
+sumLength = firstLength + secondLength + thirdArgumentLength;
+averageLength = Math.floor(sumLength/3);
+
+console.log(sumLength);
+console.log(averageLength);
+}
