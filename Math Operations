@@ -1,0 +1,35 @@
+function mather (arr,arr2,arr3){
+let num = arr;
+let num2 = arr2;
+let operator = arr3;
+
+ let result;
+
+switch(operator){
+    case "+":
+    let result = num + num2;
+    console.log(result);
+    break;
+    case "-":
+        let result = num - num2;
+        console.log(result);
+        break;
+    case "*":
+        let result = num * num2;
+        console.log(result);
+        break;
+    case "/":
+        let result = num / num2;
+        console.log(result);
+        break;
+    case "%":
+        let result = num %  num2;
+        console.log(result);
+        break;
+    case "**":
+        let result = num ** num2;
+        console.log(result);
+        break;               
+}
+}
+mather(5, 6, '+')
