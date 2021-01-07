@@ -1,0 +1,31 @@
+function score(){
+    let arr = Array.from(arguments);
+    let command = arr[0];
+    let num = command[0];
+    
+    for (let index = 1; index < command.length; index++) {
+       let com = command[index];
+
+       switch(com){
+           case'chop':
+           num /= 2;
+           break;
+           case'dice':
+           num = Math.sqrt(num);
+           break;
+           case'spice':
+           num++;
+           break;
+           case'bake':
+           num *= 3;
+           break;
+           case'fillet':
+           num = num - (6 * 0.2);
+           break;
+       }
+
+        console.log(num);
+    }
+}
+
+score(['9', 'dice', 'spice', 'chop', 'bake', 'fillet']);
