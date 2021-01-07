@@ -1,0 +1,13 @@
+function solve (arr,arr2,arr3){
+let plod = arr;
+let kilograms = arr2 / 1000;
+let moneyKilograms = arr3;
+
+kilograms.toFixed(2);
+let needMoney = kilograms * moneyKilograms;
+
+console.log('I need '+ needMoney.toFixed(2) + ' to buy $' +
+kilograms.toFixed(2) + ' kilograms orange.')
+}
+
+solve('orange', 2500, 1.80)
