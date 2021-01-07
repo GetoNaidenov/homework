@@ -1,0 +1,33 @@
+function solved(arr,arr2){
+let kilometers = arr;
+let mesto = arr2;
+let maxSpeed = 0;
+let devision = 0;
+
+switch(mesto){
+    case 'motorway':
+    maxSpeed = 130;
+    break;
+    case 'interstate':
+    maxSpeed = 90;
+    break;
+    case 'city':
+    maxSpeed = 50;
+    break;
+    case 'residential':
+    maxSpeed = 20;
+    break;
+}
+
+devision = kilometers - maxSpeed;
+
+if(devision < 20){
+    console.log('speeding');
+}else if(devision < 40 && devision > 20){
+    console.log('excessive speeding');
+}else if(devision > 40){
+    console.log('reckless driving ');
+}
+}
+solved(200, 'motorway');
+VM174:29 reckless driving 
