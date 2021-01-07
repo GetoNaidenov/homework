@@ -1,0 +1,22 @@
+function score(){
+    let arr = Array.from(arguments);
+    let command = arr[0];
+    let result = '{ '
+
+    for (let index = 0; index < command.length; index++) {
+        
+        if(index % 2 == 0){
+            result += command[index] + ': ';
+        }else{
+            result += command[index]
+            if(index < command.length -1){
+            result  += ', ';
+            }
+        }
+
+    }
+    result += ' }';
+    console.log(result);
+}
+
+score(['Yoghurt', '48', 'Rise', '138', 'Apple', '52']);
