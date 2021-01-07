@@ -1,0 +1,28 @@
+function solve(number){
+    let num = number
+    var digits = [];
+    let sum = 0;
+    let bool = true;
+    while (num > 0) {
+        digits.push(num % 10);
+        num = parseInt(num / 10);
+    }
+ 
+    for (let index = 0; index < digits.length; index++) {
+       let indicator = digits[0];
+    sum += digits[index];
+
+    if(digits[index] > indicator || digits[index] < indicator){
+        bool = false;
+    }
+    }
+
+    if(bool == false){
+        console.log('false');
+    }else{
+        console.log('true');
+    }
+        console.log(sum)
+    }
+
+    solve(2222222);
