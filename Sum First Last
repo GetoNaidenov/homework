@@ -1,0 +1,16 @@
+function score(){
+    let arr = Array.from(arguments);
+    let arr2 = arr[0];
+    let sum = 0;
+    let last = parseInt(arr2[arr2.length -1]);
+
+    let firstElement = parseInt(arr2[0]);
+  
+    sum = firstElement + last;
+
+
+    console.log(sum)
+
+}
+
+score(['20', '30', '40']);
