@@ -1,0 +1,15 @@
+function score(){
+    let arg = Array.from(arguments);
+    let arr = arg[0];
+   
+    arr.sort(compareNumbers);
+
+    function compareNumbers(a,b){
+        return a - b;
+    }
+    arr.splice(2);
+
+console.log(arr.join(' '));
+}
+
+score([30, 15, 50, 5]);
