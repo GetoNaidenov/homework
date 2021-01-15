@@ -1,0 +1,33 @@
+
+function eql(input){
+
+let count = 0;
+for (let row = 0; row < input.length -1; row++) {
+    for (let cow = 0; cow < input[row].length -1; cow++) {
+      
+
+
+        if(input[row][cow] == input[row + 1][cow]){
+            count += 1;
+        }
+
+        if(input[row][cow] == input[row ][cow +1]){
+            count += 1;
+        }
+
+        if(row == input.length -2 && input[row +1][cow] == input[row +1][cow +1]){
+            count += 1;
+        }
+
+    }
+}
+
+
+console.log(count);
+}
+
+
+eql([['test', 'yes', 'yo', 'ho'],
+['well', 'done', 'yo', '6'],
+['not', 'done', 'yet', '5']]
+);
