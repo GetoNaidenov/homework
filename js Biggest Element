@@ -1,0 +1,28 @@
+function score(){
+    let arg = Array.from(arguments);
+    let args = arg[0];
+    let max = 0;
+
+  
+    for (let index = 0; index < args.length; index++) {
+        let arr = args[index];
+       
+        for (let ind = 0; ind < arr.length; ind++) {
+           let arr2 = arr[ind];
+            
+           if(arr2 > max){
+               max = arr2;
+              
+           }
+           
+        }
+        
+    }
+      console.log(max);
+
+
+}
+
+score([[20, 50, 10],
+    [8, 33, 145]]
+   );
