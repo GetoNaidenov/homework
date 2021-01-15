@@ -1,0 +1,31 @@
+function score(){
+    let arg = Array.from(arguments);
+    let args = arg[0];
+    let firstDiagonal = 0;
+    let lastDiagonal = 0;
+    let length = 0;
+    let resul = [];
+    
+    for (let index = 0; index < args.length; index++) {
+        let arr = args[index];
+        let arr2 = arr[index];
+        lengthH = arr.length -1 - index;
+        firstDiagonal += arr2;
+        lastDiagonal += arr[lengthH];
+
+           
+        }
+        resul.push(firstDiagonal);
+        resul.push(lastDiagonal);
+        console.log(resul.join(' '));
+    }
+    
+     
+
+
+
+
+score([[3, 5, 17],
+    [-1, 7, 14],
+    [1, -8, 89]]
+   );
