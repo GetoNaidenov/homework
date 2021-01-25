@@ -1,0 +1,33 @@
+function fruits(input){
+let result = {};
+
+for (const line of input) {
+    const[fruit,quantity] = line.split('=> ');
+
+    tity = parseInt(quantity); 
+
+
+    if(result.hasOwnProperty(fruit) === false){
+        result[fruit] = {};
+        result[fruit] = tity;
+    }else{
+        result[fruit] += tity;
+    }
+}
+
+for (const key in result) {
+    let quan =Math.floor(result[key] / 1000);
+    if(quan >= 1){
+        console.log(`${key}=> ${quan}`);
+    }
+    
+}
+
+}
+fruits(['Orange => 2000',
+ 'Peach => 1432',
+ 'Banana => 450',
+ 'Peach => 600',
+ 'Strawberry => 549']
+ 
+ )   ;
