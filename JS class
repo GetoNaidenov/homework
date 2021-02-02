@@ -1,0 +1,25 @@
+function Person(firstName,lastName){
+    this.firstName = firstName;
+    this.lastName = lastName;
+
+    Object.defineProperty(this,'fullName',{
+        set(newFullName){
+            const nameArray = newFullName.split(' ');
+            if(nameArray.lenght !== 2 ){
+                return;
+            }
+            this.firstName = nameArray[0];
+            this.lastName = nameArray[1];
+
+        },
+        get(){
+            return this.firstName + ' ' + this.lastName;
+        }
+    });
+}
+
+
+const ivan = new Person('ivan','ivanov');
+console.log(ivan.fullName);
+ivan.fullName = 'test test';
+console.log(ivan.fullName);
