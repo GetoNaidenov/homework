@@ -1,0 +1,34 @@
+function solution(data) {
+    const recPrototype = {
+        area() {
+            return this.heigth * this.width;
+        },
+        compareTo(otherRec) {
+            const currentRecArea = this.area();
+            const otherRecArea = otherRec.area();
+
+            return  otherRecArea - currentRecArea || otherRec.width - this.width;
+        }
+    };
+
+    function createRec(width, heigth) {
+        const result = Object.create(recPrototype);
+        result.width = width;
+        result.heigth = heigth;
+        return result;
+    }
+
+    return data.reduce(function (acc, [width, heigth]) {
+        return acc.concat( createRec(width, heigth));
+    }, []).sort((a, b) => {
+        return a.compareTo(b);
+     });
+}
+
+
+const [lec1, lec2] = solution( [[10, 5], [5, 12]]);
+console.log(lec1.area());
+console.log(lec2.area());
+console.log(lec1.compareTo(lec2));
+console.log(lec2.compareTo(lec1));
+
