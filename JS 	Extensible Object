@@ -1,0 +1,22 @@
+function solve(){
+
+    const proto = {};
+
+    const instance = Object.create(proto);
+
+    instance.extend = function(temlpate){
+
+        for(let prop in temlpate){
+          if(typeof temlpate[prop] === 'function'){
+            
+            proto[prop] =  temlpate[proto];
+          }else{
+
+            instance[prop] = temlpate[prop];
+          }
+
+        }
+    };
+
+    return instance;
+}
