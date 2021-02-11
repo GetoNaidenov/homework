@@ -1,0 +1,14 @@
+function loadRepos() {
+const resEl = document.getElementById('res');
+const url = 'https://api.github.com/users/testnakov/repos';
+const xmlHtttpRequest = new XMLHttpRequest();
+xmlHtttpRequest.addEventListener('readystatechange', () => {
+
+ if(xmlHtttpRequest.readyState === 4 && xmlHtttpRequest.status === 200){
+   resEl.innerHTML = xmlHtttpRequest.responseText;
+ }
+});
+xmlHtttpRequest.open('GET',url);
+xmlHtttpRequest.send();
+
+}
