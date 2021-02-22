@@ -1,0 +1,47 @@
+
+const appId = '467A1549-91E0-275E-FF69-9DD4908AB000';
+const apiKey = '19F2E59B-0490-4593-A21F-B1DDB537AB87';
+
+function host(endpoint) {
+    return `https://api.backendless.com/${appId}/${apiKey}/data/${endpoint}`;
+}
+
+export async function getBooks() {
+    const response = await fetch(host('books'));
+    const data = await response.json();
+    return data;
+}
+
+export async function createBook(book) {
+    const response = await fetch(host('books'), {
+        method: 'POST',
+        body: JSON.stringify(book),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    });
+    const data = await response.json();
+    return data;
+}
+
+export async function updateBook(book) {
+    const id = book.objectId;
+    const response = await fetch(host('books/' + id), {
+        method: 'PUT',
+        body: JSON.stringify(book),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    });
+    const data = await response.json();
+    return data;
+}
+
+export async function deleteBook(id) {
+ const response = await fetch(host('books/' + id),{
+     method:'DELETE'
+ });
+ const data = await response.json();
+ return data;
+}
+
