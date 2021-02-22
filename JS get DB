@@ -1,0 +1,57 @@
+(function () {
+    const appContainerEl = document.getElementById('app-container');
+    const loginContainerEl = document.getElementById('login-container');
+    const genericLoginError = document.getElementById('generic-login-error');
+
+    const loginBtn = document.getElementById('login-btn');
+    const emailInputEl = document.getElementById('email');
+    const passwordInputEl = document.getElementById('password');
+
+    loginBtn.addEventListener('click', function loginHandler() {
+        genericLoginError.textContent = '';
+        const email = emailInputEl.value;
+        const password = passwordInputEl.value;
+
+        if (!email || !password) {
+            alert('Please provide credentials!');
+            return;
+        }
+        console.log(password, email);
+    });
+
+
+
+    // console.log(firebase.app().name);  // "[DEFAULT]"
+
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+        genericLoginError.textContent = error.message;
+        
+      //  var errorCode = error.code;
+      //  var errorMessage = error.message;
+    });
+
+    function init() {
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            console.log(user);
+            if (user) {
+                loginContainerEl.classList.add('hidden');
+                appContainerEl.classList.remove('hidden');
+                // User is signed in.
+                //   var displayName = user.displayName;
+                //   var email = user.email;
+                //   var emailVerified = user.emailVerified;
+                //   var photoURL = user.photoURL;
+                //   var isAnonymous = user.isAnonymous;
+                //   var uid = user.uid;
+                //   var providerData = user.providerData;
+                // ...
+            } else {
+                appContainerEl.classList.add('hidden');
+                loginContainerEl.classList.remove('hidden');
+            }
+        });
+    }
+
+    init();
+}());
