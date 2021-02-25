@@ -1,0 +1,120 @@
+(function () {
+    const templates = {};
+    const loadingBoxEl = document.getElementById('loadingBox');
+    const infoBoxEl = document.getElementById('infoBox');
+    const errorBoxEl = document.getElementById('errorBox');
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC8_94SVVAXpwDdodKgcVfUyJ1wl2Em5GQ",
+    authDomain: "furniture-dbcf1.firebaseapp.com",
+    databaseURL: "https://furniture-dbcf1.firebaseio.com",
+    projectId: "furniture-dbcf1",
+    storageBucket: "furniture-dbcf1.appspot.com",
+    messagingSenderId: "84677126556",
+    appId: "1:84677126556:web:d3cc4b15fa8b0b76a54059",
+    measurementId: "G-JBWZTTR8LR"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+
+    function toggleLoader(showLoader) {
+        if (showLoader) {
+            loadingBoxEl.style.display = 'inline';
+            return;
+        }
+        loadingBoxEl.style.display = 'none';
+
+    }
+
+    function getTemplate(templatePath) {
+        const existingTemplate = templates[templatePath];
+        if (existingTemplate) {
+            return Promise.resolve(existingTemplate);
+        }
+
+        return fetch(`/template/${templatePath}.hbs`).then(res => res.text())
+            .then(templateString => {
+                const template = Handlebars.compile(templateString);
+                templates[templatePath] = template;
+                return template;
+            });
+    }
+
+    function renderTemplate(templatePath, templateContext, swapFn) {
+        return getTemplate(templatePath).then(templateFn => {
+            const content = templateFn(templateContext);
+            swapFn(content);
+        });
+    }
+    function onCreateFurnitureLoaded(){
+        const newMakeEl = document.getElementById('new-make');
+        const newModelEl = document.getElementById('new-model');
+        const newYearEl = document.getElementById('new-year');
+        const newDescriptionEl = document.getElementById('new-description');
+        const newPriceEl = document.getElementById('new-price');
+        const newImageEl = document.getElementById('new-image');
+        const newMaterialEl = document.getElementById('new-material');
+        const createBtn = document.getElementById('create-btn');
+
+        createBtn.addEventListener('click',() => {
+          const  inputs = [
+              newMakeEl,
+              newModelEl,
+              newYearEl,
+              newDescriptionEl,
+              newPriceEl,
+              newImageEl,
+              newMaterialEl
+          ];
+         const values = inputs.map(input => input.value);
+         const missingInputsValues = values.findIndex(v => !v);
+          if(missingInputsValues !== -1){
+              console.error('MISSING DATA',inputs[missingInputsValues]);
+              return;
+          }
+          fetch()
+        });
+    }
+
+    const app = Sammy('#container', function () {
+
+        this.before({}, function () {
+            toggleLoader(true);
+        });
+
+        this.get('#/', function () {
+            renderTemplate('home', {}, this.swap.bind(this))
+                .then(() => {
+                    toggleLoader(false);
+                });
+        });
+        this.get('#/profile', function () {
+            renderTemplate('profile', {}, this.swap.bind(this))
+            .then(() => {
+                toggleLoader(false);
+            });
+          
+        });
+        this.get('#/create-furniture', function () {
+            renderTemplate('create-furniture', {}, this.swap.bind(this))
+            .then(() => {
+                toggleLoader(false);
+            });
+            
+        });
+        this.get('#/furniture-detail/:id', function () {
+            renderTemplate('furniture-detail', {}, this.swap.bind(this))
+            .then(() => {
+                toggleLoader(false);
+            });
+            
+        });
+
+    });
+
+    app.run('#/');
+}());
+
