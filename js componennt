@@ -1,0 +1,29 @@
+const appRootTemplate = document.createElement('template');
+appRootTemplate.innerHTML = `
+ <style> .test { color: green; } </style>
+<h1> <slot> </slot></h1>`;
+
+class AppRoot extends HTMLElement {
+    constructor(){
+        super();
+     const root =   this.attachShadow({mode: 'open'});
+     const h1 = document.createElement('h1');
+      h1.textContent = 'HELLO WEB COMPONENT';
+      root.appendChild(h1);
+      root.appendChild(appRootTemplate.content.cloneNode(true));
+      root.addEventListener('click',console.log);
+    }
+
+    connectedCollback(){
+        console.log('Component was Connected');
+    }
+    
+}
+
+customElements.define('app-root',AppRoot);
+
+const appRoot2 = new AppRoot();
+setTimeout(function(){
+    
+   document.body.appendChild(appRoot2);
+},3000);
