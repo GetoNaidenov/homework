@@ -1,0 +1,114 @@
+class VeterinaryClinic {
+    constructor(clinicName, capacity) {
+        this.clinicName = clinicName
+        this.capacity = capacity
+        this.clients = [];
+        this._totalProfit = 0;
+        this._currentWorkload = 0;
+    }
+    newCustomer(ownerName, petName, kind, procedures) {
+        if (this.countClients === false) {
+            throw new Error('Sorry, we are not able to accept more patients!');
+        } else if (this.getPet(ownerName, petName) !== undefined) {
+            const pet = this.getPet(ownerName, petName);
+            if (pet.length !== 0) {
+                throw new Error(`This pet is already registered under ${ownerName} name! ${petName} is on our lists, waiting for ${pet.procedures.join(', ')}.`)
+            }
+        } else {
+
+            let pet = {
+                petName,
+                kind,
+                procedures
+            }
+            const pets = [];
+            pets.push(pet);
+            const client = {
+                ownerName,
+                pets
+            }
+            this.clients.push(client);
+            this._currentWorkload++;
+            return `Welcome ${petName}!`
+        }
+    }
+    getClient(ownerName) {
+        let owner;
+        for (let i = 0; i < this.clients.length; i++) {
+            if (this.clients[i].ownerName === ownerName) {
+                owner = this.clients[i];
+            }
+        }
+        return owner;
+    }
+    getPet(ownerName, petName) {
+        const client = this.getClient(ownerName);
+        let pet;
+        for (let i = 0; i < client.pets.length; i++) {
+            if (client.pets[i].petName === petName) {
+                pet = this.client.pets[i];
+            }
+            
+        }
+        return pet;
+    }
+    onLeaving(ownerName, petName) {
+        if (this.getClient(ownerName) === undefined) {
+            throw new Error('Sorry, there is no such client!');
+        }
+        if (this.getPet(ownerName, petName) === undefined) {
+            throw new Error(`Sorry, there are no procedures for ${petName}!`);
+        }
+        if (this.getPet(ownerName, petName) !== undefined) {
+            const pet = this.getPet(ownerName, petName);
+            if (pet.procedures.length === 0) {
+                throw new Error(`Sorry, there are no procedures for ${petName}!`);
+            }
+            this._totalProfit = pet.procedures.length * 500.00;
+            pet.procedures = [];
+            this._currentWorkload--;
+            return `Goodbye ${petName}. Stay safe!`
+        }
+
+    }
+    toString() {
+        let percentage = this.capacity * this._currentWorkload;
+        const result = [
+            `${this.clinicName} is ${percentage}% busy today!`,
+            `Total profit: ${this._totalProfit}$`
+        ];
+        this.clients.sort(function (a, b) { return a.ownerName - b.ownerName });
+        this.clients.forEach(c => {
+            result.push(`${c.ownerName} with:`)
+            if (c.pets !== 0) {
+                c.pets.forEach(p => result.push(`---${p.petName} - a ${p.kind} that needs: ${p.procedures.join(', ')}`))
+            }
+        });
+
+
+
+        return result.join('\n');
+
+    }
+
+
+
+    countClients() {
+        if (this.clients.length < this.capacity) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+}
+let clinic = new VeterinaryClinic('SoftCare', 10);
+console.log(clinic.newCustomer('Jim Jones', 'Tom', 'Cat', ['A154B', '2C32B', '12CDB']));
+console.log(clinic.newCustomer('Anna Morgan', 'Max', 'Dog', ['SK456', 'DFG45', 'KS456']));
+console.log(clinic.newCustomer('Jim Jones', 'Tiny', 'Cat', ['A154B']));
+console.log(clinic.onLeaving('Jim Jones', 'Tiny'));
+console.log(clinic.toString());
+clinic.newCustomer('Jim Jones', 'Sara', 'Dog', ['A154B']);
+console.log(clinic.toString());
